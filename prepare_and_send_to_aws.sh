@@ -19,7 +19,7 @@ sample='your_sample.csv'
 region='eu-west-1'
 
 echo "Generating the data"
-#python epi_db_reader ACTIVATE
+python epi_db_reader ACTIVATE
 
 echo "Shuffling dataset and removing 10 inscriptions as an example for evaluating"
 shuf files/epi_data.csv > ${shuffled}
@@ -27,8 +27,8 @@ cat ${shuffled} | head -n 10 > ${sample}
 sed -i -e 1,10d ${shuffled}
 
 echo "Uploading to S3" # overwrites files with these names
-#aws s3 cp ${shuffled} s3://${bucket}/${shuffled}
-#aws s3 cp files/schema.json s3://${bucket}/${dataname}-schema.json
+aws s3 cp ${shuffled} s3://${bucket}/${shuffled}
+aws s3 cp files/schema.json s3://${bucket}/${dataname}-schema.json
 
 echo "Creating datasource" # S3 bucket permissions will have to allow ML access
 aws machinelearning create-data-source-from-s3 --data-source-id ${dataname} --data-source-name ${dataname} \

@@ -2,9 +2,9 @@ import json
 import requests
 
 
-LIMIT = 100  # items per request
 START = 100  # start year
 END = 200  # end year
+LIMIT = 100  # items per request
 
 
 def build_url(our_offset=0):
