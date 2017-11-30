@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "targetAttributeName": "date",
+  "dataFormat": "CSV",
+  "dataFileContainsHeader": false,
+  "attributes": [
+    {
+      "attributeName": "country",
+      "attributeType": "TEXT"
+    },
+    {
+      "attributeName": "province",
+      "attributeType": "TEXT"
+    },
+    {
+      "attributeName": "findspot",
+      "attributeType": "TEXT"
+    },
+    {
+      "attributeName": "type_of_inscription",
+      "attributeType": "TEXT"
+    },
+    {
+      "attributeName": "date",
+      "attributeType": "CATEGORICAL"
+
+    },
+    {
+      "attributeName": "inscription",
+      "attributeType": "TEXT"
+    }
+  ]
+}
