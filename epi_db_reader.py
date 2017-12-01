@@ -9,7 +9,7 @@ LIMIT = 100  # items per request
 
 FILE_NAME = 'files/epi_data.csv'  # file with resulting data
 
-# attributes of each item that will be checked
+# attributes of each item that will be checked - if you change this, also change schema.json
 
 FIELDS_TO_CHECK = dict()
 FIELDS_TO_CHECK['date'] = ['not_before']
@@ -54,10 +54,10 @@ def loop_over_items(items):
                 values.append(cleaners.get_date(item[date]))
 
             for normal in FIELDS_TO_CHECK['normal']:
-                values.append(cleaners.remove_commas(item[normal]))
+                values.append(cleaners.basic_clean(item[normal]))
 
             for thorough in FIELDS_TO_CHECK['thorough_clean']:
-                values.append(cleaners.clean_inscription(item[thorough]))
+                values.append(cleaners.thorough_clean(item[thorough]))
 
             writers.write_to_csv(csv_file, values)
             count += 1

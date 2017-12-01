@@ -5,6 +5,10 @@
   "dataFileContainsHeader": false,
   "attributes": [
     {
+      "attributeName": "date",
+      "attributeType": "CATEGORICAL"
+    },
+    {
       "attributeName": "country",
       "attributeType": "TEXT"
     },
@@ -19,11 +23,6 @@
     {
       "attributeName": "type_of_inscription",
       "attributeType": "TEXT"
-    },
-    {
-      "attributeName": "date",
-      "attributeType": "CATEGORICAL"
-
     },
     {
       "attributeName": "inscription",
