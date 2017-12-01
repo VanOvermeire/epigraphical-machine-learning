@@ -9,10 +9,12 @@ An experiment with training Machine Learning models using the collection of insc
 
 ## Requirements
 
-- [python 3] [2] with pip
-- bash (either a unix based system or an emulator in Windows)
-- aws account & [aws cli][3] with your account set as the default
-- an [S3 bucket] [4] in your account
+- [python 3] [2] with pip installer
+- the python 'requests' module
+- bash shell
+- aws account 
+- [aws cli][3] with your account as the default
+- an [S3 bucket] [4]
 
 [2]: https://www.python.org/downloads/
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/installing.html
@@ -20,7 +22,7 @@ An experiment with training Machine Learning models using the collection of insc
 
 ## Running the script
 
-Just run 
+Download or clone this project. Next, run:
 
 `./prepare_and_send_to_aws.sh` 
 
