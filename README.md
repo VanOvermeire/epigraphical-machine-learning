@@ -3,7 +3,7 @@
 ## Overview
 
 An experiment with training Machine Learning models using the collection of inscriptions that the
-[Epigraphic Database Heidelberg] [1] offers under a Creative Commons Licence.
+[Epigraphic Database Heidelberg] [1] offers under a Creative Commons Licence, plus the power of AWS Machine Learning
 
 [1]: http://edh-www.adw.uni-heidelberg.de/home
 
