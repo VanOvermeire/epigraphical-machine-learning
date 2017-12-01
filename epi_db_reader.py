@@ -9,8 +9,7 @@ LIMIT = 100  # items per request
 
 FILE_NAME = 'files/epi_data.csv'  # file with resulting data
 
-# attributes of each item that will be checked - if you change this, also change schema.json
-
+# attributes of each item - if you change this, also change schema.json!
 FIELDS_TO_CHECK = dict()
 FIELDS_TO_CHECK['date'] = ['not_before']
 FIELDS_TO_CHECK['normal'] = ['country', 'province_label', 'findspot', 'type_of_inscription']
