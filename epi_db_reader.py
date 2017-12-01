@@ -7,6 +7,15 @@ START = 100  # start year
 END = 200  # end year
 LIMIT = 100  # items per request
 
+FILE_NAME = 'files/epi_data.csv'  # file with resulting data
+
+# attributes of each item that will be checked
+
+FIELDS_TO_CHECK = dict()
+FIELDS_TO_CHECK['date'] = ['not_before']
+FIELDS_TO_CHECK['normal'] = ['country', 'province_label', 'findspot', 'type_of_inscription']
+FIELDS_TO_CHECK['thorough_clean'] = ['transcription']
+
 
 def build_url(our_offset=0):
     url = 'http://edh-www.adw.uni-heidelberg.de/data/api/inscriptions/search?'
@@ -34,18 +43,23 @@ def get_total_item_count():
 def loop_over_items(items):
     count = 0
     errors = 0
-    csv_file = open('files/epi_data.csv', 'a')
+
+    csv_file = open(FILE_NAME, 'a')
 
     for item in items:
         try:
-            country = cleaners.remove_commas(item['country'])
-            province = cleaners.remove_commas(item['province_label'])
-            findspot = cleaners.remove_commas(item['findspot'])
-            type_of_inscription = cleaners.remove_commas(item['type_of_inscription'])
-            date = cleaners.get_date(item['not_before'])
-            inscription = cleaners.clean_inscription(item['transcription'])
+            values = []
 
-            writers.write_to_csv(csv_file, country, province, findspot, type_of_inscription, date, inscription)
+            for date in FIELDS_TO_CHECK['date']:
+                values.append(cleaners.get_date(item[date]))
+
+            for normal in FIELDS_TO_CHECK['normal']:
+                values.append(cleaners.remove_commas(item[normal]))
+
+            for thorough in FIELDS_TO_CHECK['thorough_clean']:
+                values.append(cleaners.clean_inscription(item[thorough]))
+
+            writers.write_to_csv(csv_file, values)
             count += 1
         except KeyError:
             # so one of our keys is missing, disregard this inscription

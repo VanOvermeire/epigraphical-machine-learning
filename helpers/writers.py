@@ -1,4 +1,4 @@
 
 
-def write_to_csv(csv_file, country, province, findspot, type_of_inscription, date, inscription):
-    csv_file.write(country + "," + province + "," + findspot + "," + type_of_inscription + "," + date + "," + inscription + '\n')
+def write_to_csv(csv_file, values):
+    csv_file.write(','.join(values) + '\n')
