@@ -10,9 +10,9 @@ An experiment with training Machine Learning models using the collection of insc
 ## Requirements
 
 - [python 3] [2] with pip installer
-- the python 'requests' module
+- the python 'requests' module (`pip3 install requests`)
 - bash shell
-- aws account 
+- aws account
 - [aws cli][3] with your account as the default
 - an [S3 bucket] [4]
 
