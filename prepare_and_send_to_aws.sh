@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
+set -e
+
 if [ $# -lt 1 ]; then
     echo "usage prepare_and_send_to_aws <s3-bucket> [optional-dataset-name]";
     exit 1;
 elif [ $# -gt 1 ]; then
-    echo "here"
     bucket=$1
     dataname=$2
 elif [ $# -eq 1 ]; then
@@ -19,7 +20,7 @@ sample='your_sample.csv'
 region='eu-west-1'
 
 echo "Generating the data"
-python epi_db_reader ACTIVATE
+python3 epi_db_reader.py
 
 echo "Shuffling dataset and removing 10 inscriptions as an example for evaluating"
 shuf files/epi_data.csv > ${shuffled}
