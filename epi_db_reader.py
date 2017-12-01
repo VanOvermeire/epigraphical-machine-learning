@@ -9,10 +9,10 @@ LIMIT = 100  # items per request
 
 
 def build_url(our_offset=0):
-    not_before = 'year_not_before=' + str(START)
-    not_after = 'year_not_after=' + str(END)
-    url = 'http://edh-www.adw.uni-heidelberg.de/data/api/inscriptions/search?' + not_before + '&' + not_after
-    return url + '&offset=' + str(our_offset) + '&limit=' + str(LIMIT)
+    url = 'http://edh-www.adw.uni-heidelberg.de/data/api/inscriptions/search?'
+    suffix = 'year_not_before=%s&year_not_after=%s&offset=%s&limit=%s' \
+             % (str(START), str(END), str(our_offset), str(LIMIT))
+    return url + suffix
 
 
 def get_sub_results(url, item_from_dictionary):
