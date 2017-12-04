@@ -16,8 +16,7 @@ fi
 # these values can be changed, as long as they end with .csv
 shuffled='shuffled_data.csv'
 sample='your_sample.csv'
-# aws region
-region='eu-west-1'
+aws_region='eu-west-1'
 
 echo "Generating the data"
 python3 epi_db_reader.py
@@ -27,18 +26,28 @@ shuf files/epi_data.csv > ${shuffled}
 cat ${shuffled} | head -n 10 > ${sample}
 sed -i -e 1,10d ${shuffled}
 
+s3_shuffled_csv="s3://${bucket}/${dataname}-${shuffled}"
+s3_schema="s3://${bucket}/${dataname}-schema.json"
+
 echo "Uploading to S3" # overwrites files with these names
-aws s3 cp ${shuffled} s3://${bucket}/${shuffled}
-aws s3 cp files/schema.json s3://${bucket}/${dataname}-schema.json
+aws s3 cp ${shuffled} ${s3_shuffled_csv}
+aws s3 cp files/schema.json ${s3_schema}
+
+datasource_id="${dataname}-source-id"
+datasource_name="${dataname}-source-name"
 
 echo "Creating datasource" # S3 bucket permissions will have to allow ML access
-aws machinelearning create-data-source-from-s3 --data-source-id ${dataname} --data-source-name ${dataname} \
---compute-statistics \
---region ${region} \
---data-spec "{ \"DataRearrangement\": \"{ \\\"splitting\\\": {\\\"percentBegin\\\":0,\\\"percentEnd\\\":70 }}\", \"DataLocationS3\": \"s3://${bucket}/${shuffled}\", \"DataSchemaLocationS3\": \"s3://${bucket}/${dataname}-schema.json\" }"
-# my god that data-spec was horrible, should have done this part in python
+aws machinelearning create-data-source-from-s3 --data-source-id ${datasource_id} --data-source-name ${datasource_name} \
+--compute-statistics --region ${aws_region} \
+--data-spec DataLocationS3=${s3_shuffled_csv},DataSchemaLocationS3=${s3_schema}
+
+datamodel_id="${dataname}-model-id"
+datamodel_name="${dataname}-model-name"
+
+aws machinelearning create-ml-model --ml-model-id ${datamodel_id} --ml-model-name ${datamodel_name} \
+--ml-model-type MULTICLASS --training-data-source-id  ${datasource_id} --region ${aws_region}
 
 echo "Cleaning up"
 rm ${shuffled}
 
-echo "Done"
+echo "Done!"
