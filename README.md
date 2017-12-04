@@ -12,12 +12,12 @@ See the article I wrote on this use case [here][2]
 
 ## Requirements
 
-- [python 3] [3] with pip installer
+- [python 3][3] with pip installer
 - the python 'requests' module (`pip3 install requests`)
 - bash shell
 - aws account
 - [aws cli][4] with your account as the default
-- an [S3 bucket] [5]
+- an [S3 bucket][5]
 
 [3]: https://www.python.org/downloads/
 [4]: https://docs.aws.amazon.com/cli/latest/userguide/installing.html
