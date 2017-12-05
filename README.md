@@ -10,22 +10,25 @@ See the article I wrote on this use case [here][2]
 [1]: http://edh-www.adw.uni-heidelberg.de/home
 [2]: https://www.linkedin.com/pulse/analyzing-roman-inscriptions-aws-machine-learning-sam-van-overmeire/
 
-## Requirements
+## Setup
 
-- [python 3][3] with pip installer
-- the python 'requests' module (`pip3 install requests`)
-- bash shell
-- aws account
-- [aws cli][4] with your account as the default
+Linux or Mac can run this in terminal, Windows users need an emulator like Cygwin
+
+[Python 3][3] is used for the script. Check if this is present with `python3 --version`
+
+With python and pip available, run `pip install -r requirements.txt` to get necessary python modules.
+
+An aws account with: 
+- the [aws cli][4] configured to use it
 - an [S3 bucket][5]
 
 [3]: https://www.python.org/downloads/
-[4]: https://docs.aws.amazon.com/cli/latest/userguide/installing.html
+[4]: https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html
 [5]: https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html
 
 ## Running the script
 
-Download or clone this project. Next, run:
+Download or clone this project. Next, in your terminal, run this command from the root of the project:
 
 `./prepare_and_send_to_aws.sh` {bucket-here} {optional-name}
 
